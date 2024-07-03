@@ -19,9 +19,9 @@ if ENV_FILE:
 class PdfParser:
     index_dir = os.path.dirname(os.path.realpath(__file__)) + "/index_directory"
     pdf_file_path = os.path.dirname(os.path.realpath(__file__)) + "/resources/CF.pdf"
-    idx_first_page = env.get("CF_SUMARIO_FIRST_PAGE")
-    idx_last_page = env.get("CF_SUMARIO_LAST_PAGE")
-    cf_last_page = env.get("CF_LAST_PAGE")
+    idx_first_page = int(env.get("CF_SUMARIO_FIRST_PAGE"))
+    idx_last_page = int(env.get("CF_SUMARIO_LAST_PAGE"))
+    cf_last_page = int(env.get("CF_LAST_PAGE"))
     titulo_idx = defaultdict(list)
     capitulo_idx = defaultdict(list)
 
