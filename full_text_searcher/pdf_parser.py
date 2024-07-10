@@ -17,6 +17,8 @@ if ENV_FILE:
 
 
 class PdfParser:
+    """Classe que analiza o PDF. Faz a indexação e insere o conteúdo no database."""
+
     index_dir = os.path.dirname(os.path.realpath(__file__)) + "/index_directory"
     pdf_file_path = os.path.dirname(os.path.realpath(__file__)) + "/resources/CF.pdf"
     idx_first_page = int(env.get("CF_SUMARIO_FIRST_PAGE"))
@@ -29,6 +31,8 @@ class PdfParser:
         self._set_index_for_pages()
 
     def _set_index_for_pages(self):
+        """Analiza o sumário da Constituição Federal para pegar as referências
+        de Títulos e Capítulos e suas páginas utilizado na indexação."""
         titulo = ""
         capitulo = ""
         cont_linha = False
@@ -37,6 +41,7 @@ class PdfParser:
 
         with open(self.pdf_file_path, "rb") as file:
             reader = PdfReader(file)
+            # Lê somente as páginas do Sumário
             for page in reader.pages[self.idx_first_page : self.idx_last_page]:
 
                 page_content = page.extract_text()
@@ -81,13 +86,11 @@ class PdfParser:
         print("Parser initialized!")
 
     def index_pdf_by_pages(self):
-        """Script para extração das páginas do PDF da constituição federal, e a indexação do conteúdo de cada página.
-        Cria um diretório para esse index, ou utiliza um já existente. Insere o conteúdo de cada página no db.
+        """Extração das páginas do PDF da Constituição Federal, e a indexação do
+        conteúdo de cada página. Cria um diretório para esse index, ou utiliza um
+        já existente. Insere o conteúdo de cada página no database.
         """
         print("Initialize indexation...")
-        # Caminhos para o diretório de índice e para o arquivo PDF
-        # index_dir = os.path.dirname(os.path.realpath(__file__)) + "/index_directory"
-        # pdf_file_path = os.path.dirname(os.path.realpath(__file__)) + "/resources/CF.pdf"
 
         # Schema do índice
         schema = Schema(
