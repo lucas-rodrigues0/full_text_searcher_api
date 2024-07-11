@@ -111,6 +111,15 @@ Caso queira pesquisar por todos os termos requisitados, deverá explicitar na bu
 As variáveis API_PORT e DEBUG são opcionais para o desenvolvimento. No App é sugerido utilizar a porta 4000, mas caso queira trocar, alterar esse valor pela  variável é possível, mas será necessário alterar as portas no Dockerfile e docker-compose para as portas serem expostas corretamente.
 A variável Debug é para o desenvolvimento da aplicação Flask. É realizado o auto reload quando há alteração de código.
 
+Para a conexão com o banco de dados é necessário inserir os valores corretos no `.env`. Os valores no arquivo `.env-example` são uma sugestão:
+```
+PG_DATABASE=<nome do database a ser criado>
+PG_USER=<usuário postgres>
+PG_PASSWORD=<senha postgres>
+PG_HOST=<nome do container postgres criado>
+PG_PORT=<porta exposta pelo container postgres>
+```
+
 ### Utilizando o Docker compose
 É necessário ter instalado o [Docker](https://docs.docker.com/engine/install/) e o [Docker Compose](https://docs.docker.com/compose/install/) para subir os serviços automaticamente.  
 
